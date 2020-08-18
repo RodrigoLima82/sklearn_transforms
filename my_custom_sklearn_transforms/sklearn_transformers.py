@@ -16,7 +16,20 @@ class DropColumns(BaseEstimator, TransformerMixin):
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
 
+class NewColumns(BaseEstimator, TransformerMixin):
+    
+    def __init__(self, column):
+        self.column = column
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        X[self.column+'_1'] = np.sqrt(X[[self.column]].sum(axis=1))
+        X[self.column+'_2'] = np.tan(np.sqrt(X[[self.column]].sum(axis=1)))
 
+        return X
+    
 class SetIndex(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
@@ -29,13 +42,3 @@ class SetIndex(BaseEstimator, TransformerMixin):
         data = X.copy()
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.set_index(self.columns, inplace=True)
-
-
-class SmoteResample(object):
-    def __init__(self):
-        pass
-
-    def fit(self, X, y):
-        X_resampled, y_resampled = SMOTE(random_state=42).fit_resample(X, y)
-        X_resampled = pd.DataFrame(X_resampled, columns=X.columns)
-        return X_resampled, y_resampled
