@@ -17,5 +17,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'imbalanced-learn==0.4.3',
+        'autoai-libs'
     ],
 )
