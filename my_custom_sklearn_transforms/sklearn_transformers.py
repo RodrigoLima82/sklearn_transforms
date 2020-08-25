@@ -17,6 +17,22 @@ class DropColumns(BaseEstimator, TransformerMixin):
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
 
+class DropNaRowns(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Primeiro realizamos a cópia do dataframe 'X' de entrada
+        data = X.copy()
+        # Remover os valores missing depois das transformacoes
+        data.dropna(inplace=True)
+
+        # Retornamos um novo dataframe sem as linhas com dados missing
+        return data
+    
 class NewColumns(BaseEstimator, TransformerMixin):
     
     def __init__(self, column):
