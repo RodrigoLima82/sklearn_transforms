@@ -63,3 +63,21 @@ class SetIndex(BaseEstimator, TransformerMixin):
         data = X.copy()
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.set_index(self.columns, inplace=True)
+    
+    
+class MapEncode(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        data = X.copy()
+        data[self.column]  = data[self.column].map({'Médio completo': 0, 
+                                                    'Superior incompleto': 1,
+                                                    'Superior incompleto - cursando': 2,
+                                                    'Superior completo': 3,
+                                                    'Pós-gradução': 4})
+        
+        return data
