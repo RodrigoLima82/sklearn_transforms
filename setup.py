@@ -17,6 +17,6 @@ setup(
     zip_safe=False,
     install_requires=[
         'imbalanced-learn==0.4.3',
-        'xgboost==0.90'
+        'xgboost==0.71'
     ],
 )
