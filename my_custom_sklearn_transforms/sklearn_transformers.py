@@ -6,40 +6,28 @@
 from sklearn.preprocessing import LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 
-#class LabelEncode(BaseEstimator, TransformerMixin):
-#    def __init__(self, columns):
-#        self.columns = columns
+class LabelEncode(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
 
-#    def fit(self, X, y=None):
-#        return self
+    def fit(self, X, y=None):
+        return self
 
-#    def transform(self, X):
-#        data = X.copy()
+    def transform(self, X):
+        data = X.copy()
 
-#        non_features = self.columns
+        non_features = self.columns
 
-#        le = LabelEncoder()
+        le = LabelEncoder()
 
-#        for columns in non_features:
-#            fe_labels = le.fit_transform(data[columns])
-#            data[columns] = fe_labels
+        for columns in non_features:
+            fe_labels = le.fit_transform(data[columns])
+            data[columns] = fe_labels
             #fe_mappings = {index: label for index, label in enumerate(le.classes_)}
 
-#        return data    
+        return data    
 
-#class DropColumns(BaseEstimator, TransformerMixin):
-#    def __init__(self, columns):
-#        self.columns = columns
-
-#    def fit(self, X, y=None):
-#        return self
-
-#    def transform(self, X):
-#        data = X.copy()
-#        return data.drop(labels=self.columns, axis='columns')
-       
-   
-class DropColumns2(BaseEstimator, TransformerMixin):
+class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
 
@@ -49,3 +37,4 @@ class DropColumns2(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
         return data.drop(labels=self.columns, axis='columns')
+       
