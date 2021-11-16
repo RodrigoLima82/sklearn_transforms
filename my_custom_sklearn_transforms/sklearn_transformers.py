@@ -1,8 +1,10 @@
-import pandas as pd
-import numpy as np
-from imblearn.over_sampling import SMOTE
+#import pandas as pd
+#import numpy as np
+#from imblearn.over_sampling import SMOTE
+#from sklearn.base import BaseEstimator, TransformerMixin
+
+from sklearn.preprocessing import LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
 
 
 class DropColumns(BaseEstimator, TransformerMixin):
@@ -16,7 +18,6 @@ class DropColumns(BaseEstimator, TransformerMixin):
         data = X.copy()
         return data.drop(labels=self.columns, axis='columns')
     
-    
 class SetIndex(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
@@ -28,36 +29,7 @@ class SetIndex(BaseEstimator, TransformerMixin):
         data = X.copy()
         return data.set_index(self.columns, inplace=True)
     
-
-class DropNaRows(BaseEstimator, TransformerMixin):
-    def __init__(self, columns):
-        self.columns = columns
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        data = X.copy()
-        data = data.dropna()   
-        return data
-
-class MapEncode(BaseEstimator, TransformerMixin):
-    def __init__(self, columns):
-        self.columns = columns
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        data = X.copy()
-        data['Educacao']  = data['Educacao'].map({'Médio completo': 0, 
-                                                    'Superior incompleto': 1,
-                                                    'Superior incompleto - cursando': 2,
-                                                    'Superior completo': 3,
-                                                    'Pós-gradução': 4})
-        
-        return data
-    
+   
 class CatEncode(BaseEstimator, TransformerMixin):
     def __init__(self, features):
         self.features = features
