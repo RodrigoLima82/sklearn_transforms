@@ -39,4 +39,13 @@ class DropColumns(BaseEstimator, TransformerMixin):
         return data.drop(labels=self.columns, axis='columns')
        
    
+class DropColumns2(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
 
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        data = X.copy()
+        return data.drop(labels=self.columns, axis='columns')
