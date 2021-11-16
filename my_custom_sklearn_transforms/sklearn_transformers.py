@@ -7,8 +7,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class LabelEncode(BaseEstimator, TransformerMixin):
-    def __init__(self, features):
-        self.features = features
+    def __init__(self, columns):
+        self.columns = columns
 
     def fit(self, X, y=None):
         return self
@@ -16,14 +16,14 @@ class LabelEncode(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
 
-        non_features = self.features
+        non_features = self.columns
 
         le = LabelEncoder()
 
-        for features in non_features:
-            fe_labels = le.fit_transform(data[features])
-            data[features] = fe_labels
-            fe_mappings = {index: label for index, label in enumerate(le.classes_)}
+        for columns in non_features:
+            fe_labels = le.fit_transform(data[columns])
+            data[columns] = fe_labels
+            #fe_mappings = {index: label for index, label in enumerate(le.classes_)}
 
         return data    
 
