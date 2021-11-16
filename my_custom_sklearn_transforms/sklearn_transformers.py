@@ -28,7 +28,19 @@ class SetIndex(BaseEstimator, TransformerMixin):
         data = X.copy()
         return data.set_index(self.columns, inplace=True)
     
-    
+
+class DropNaRows(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        data = X.copy()
+        data = data.dropna()   
+        return data
+
 class MapEncode(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
