@@ -6,7 +6,7 @@
 from sklearn.preprocessing import LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 
-class CatEncode(BaseEstimator, TransformerMixin):
+class LabelEncode(BaseEstimator, TransformerMixin):
     def __init__(self, features):
         self.features = features
 
@@ -26,7 +26,7 @@ class CatEncode(BaseEstimator, TransformerMixin):
             fe_mappings = {index: label for index, label in enumerate(le.classes_)}
 
         return data    
-        
+
 class DropColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
