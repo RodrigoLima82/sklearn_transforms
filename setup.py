@@ -16,6 +16,7 @@ setup(
     ],
     zip_safe=False,
     install_requires=[
-        'imbalanced-learn==0.4.3'
+        'imbalanced-learn==0.4.3',
+        'lightgbm==3.3.1'
     ],
 )
